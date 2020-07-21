@@ -9,12 +9,12 @@ import Foundation
 import XCTest
 @testable import AlgoliaSearchClient
 
-func AssertEncodeDecode<T: Codable>(_ value: T, _ rawValue: JSON, file: StaticString = #file, line: UInt = #line) throws {
+func AssertEncodeDecode<T: Codable>(_ value: T, _ rawValue: JSON, file: StaticString = #filePath, line: UInt = #line) throws {
   try AssertEncode(value, expected: rawValue, file: file, line: line)
   try AssertDecode(rawValue, expected: value, file: file, line: line)
 }
 
-func AssertDecode<T: Codable & Equatable>(_ input: JSON, expected: T, file: StaticString = #file, line: UInt = #line) throws {
+func AssertDecode<T: Codable & Equatable>(_ input: JSON, expected: T, file: StaticString = #filePath, line: UInt = #line) throws {
 
   let encoder = JSONEncoder()
   encoder.dateEncodingStrategy = .swiftAPIClient
@@ -27,7 +27,7 @@ func AssertDecode<T: Codable & Equatable>(_ input: JSON, expected: T, file: Stat
   XCTAssertEqual(expected, decoded, file: file, line: line)
 }
 
-func AssertDecode<T: Codable>(_ input: JSON, expected: T, file: StaticString = #file, line: UInt = #line) throws {
+func AssertDecode<T: Codable>(_ input: JSON, expected: T, file: StaticString = #filePath, line: UInt = #line) throws {
 
   let encoder = JSONEncoder()
   encoder.dateEncodingStrategy = .swiftAPIClient
@@ -43,12 +43,12 @@ func AssertDecode<T: Codable>(_ input: JSON, expected: T, file: StaticString = #
   XCTAssertEqual(expectedJSON, decodedJSON, file: file, line: line)
 }
 
-@discardableResult func AssertDecode<T: Decodable>(jsonFilename filename: String, expected: T.Type, file: StaticString = #file, line: UInt = #line) throws -> T {
+@discardableResult func AssertDecode<T: Decodable>(jsonFilename filename: String, expected: T.Type, file: StaticString = #filePath, line: UInt = #line) throws -> T {
   let data = try Data(filename: filename)
   return try JSONDecoder().decode(T.self, from: data)
 }
 
-func AssertEncode<T: Encodable>(_ value: T, expected: JSON, file: StaticString = #file, line: UInt = #line) throws {
+func AssertEncode<T: Encodable>(_ value: T, expected: JSON, file: StaticString = #filePath, line: UInt = #line) throws {
 
   let encoder = JSONEncoder()
   encoder.dateEncodingStrategy = .swiftAPIClient
@@ -61,7 +61,7 @@ func AssertEncode<T: Encodable>(_ value: T, expected: JSON, file: StaticString =
   XCTAssertEqual(jsonFromValue, expected, file: file, line: line)
 }
 
-func AssertEquallyEncoded<A: Encodable, B: Encodable>(_ l: A, _ r: B, file: StaticString = #file, line: UInt = #line) throws {
+func AssertEquallyEncoded<A: Encodable, B: Encodable>(_ l: A, _ r: B, file: StaticString = #filePath, line: UInt = #line) throws {
   let encoder = JSONEncoder()
   encoder.dateEncodingStrategy = .swiftAPIClient
   let lData = try encoder.encode(l)

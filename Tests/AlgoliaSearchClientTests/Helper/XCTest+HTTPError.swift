@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import AlgoliaSearchClient
 
-func AssertThrowsHTTPError<T>(_ body: @autoclosure () throws -> T, statusCode: Int, file: StaticString = #file, line: UInt = #line) throws {
+func AssertThrowsHTTPError<T>(_ body: @autoclosure () throws -> T, statusCode: Int, file: StaticString = #filePath, line: UInt = #line) throws {
   do {
     let _ = try body()
     XCTFail("Expected HTTP error", file: file, line: line)

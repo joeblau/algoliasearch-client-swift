@@ -22,7 +22,7 @@ extension AlgoliaCommandTest {
     return TestValues()
   }
 
-  func check(command: AlgoliaCommand, callType: CallType, method: HTTPMethod, urlPath: String, queryItems: Set<URLQueryItem>, body: Data?, additionalHeaders: [HTTPHeaderKey: String]? = nil, requestOptions: RequestOptions, file: StaticString = #file, line: UInt = #line) {
+  func check(command: AlgoliaCommand, callType: CallType, method: HTTPMethod, urlPath: String, queryItems: Set<URLQueryItem>, body: Data?, additionalHeaders: [HTTPHeaderKey: String]? = nil, requestOptions: RequestOptions, file: StaticString = #filePath, line: UInt = #line) {
     let request = command.urlRequest
     XCTAssertEqual(command.callType, callType, file: file, line: line)
     XCTAssertEqual(request.httpMethod, method.rawValue, file: file, line: line)
